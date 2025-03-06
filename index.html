@@ -1,0 +1,156 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geometric Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 data-en="Geometric Calculator" data-ar="حاسبة الأشكال الهندسية">Geometric Calculator</h1>
+            <div class="header-controls">
+                <button id="langToggle" aria-label="Toggle language">
+                    <span>🌐</span> <span id="currentLang">EN</span>
+                </button>
+                <button id="themeToggle" aria-label="Toggle dark mode">
+                    <span class="moon">🌙</span>
+                    <span class="sun">☀️</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="calculator-card">
+            <div class="form-group">
+                <label for="shape">Select a shape:</label>
+                <select id="shape" onchange="showInputFields()">
+                    <option value="rectangle">Rectangle 📏</option>
+                    <option value="circle">Circle ⭕</option>
+                    <option value="triangle">Triangle 🔺</option>
+                    <option value="square">Square 🟥</option>
+                    <option value="trapezoid">Trapezoid </option>
+                    <option value="ellipse">Ellipse </option>
+                    <option value="parallelogram">Parallelogram </option>
+                </select>
+            </div>
+
+            <div id="rectangleInputs" class="input-section">
+                <div class="form-group">
+                    <label for="rectLength">Length:</label>
+                    <input type="number" id="rectLength" min="0" step="any" placeholder="Enter length">
+                </div>
+                <div class="form-group">
+                    <label for="rectWidth">Width:</label>
+                    <input type="number" id="rectWidth" min="0" step="any" placeholder="Enter width">
+                </div>
+            </div>
+
+            <div id="squareInputs" class="input-section" style="display:none;">
+                <div class="form-group">
+                    <label for="squareSide">Side length:</label>
+                    <input type="number" id="squareSide" min="0" step="any" placeholder="Enter side length">
+                </div>
+            </div>
+
+            <div id="circleInputs" class="input-section" style="display:none;">
+                <div class="form-group">
+                    <label for="circleRadius">Radius:</label>
+                    <input type="number" id="circleRadius" min="0" step="any" placeholder="Enter radius">
+                </div>
+            </div>
+
+            <div id="triangleInputs" class="input-section" style="display:none;">
+                <div class="form-group">
+                    <label for="triBase">Base:</label>
+                    <input type="number" id="triBase" min="0" step="any" placeholder="Enter base length">
+                </div>
+                <div class="form-group">
+                    <label for="triHeight">Height:</label>
+                    <input type="number" id="triHeight" min="0" step="any" placeholder="Enter height">
+                </div>
+                <div class="form-group">
+                    <label for="triSide1">Side 1:</label>
+                    <input type="number" id="triSide1" min="0" step="any" placeholder="Enter side 1 (for perimeter)">
+                </div>
+                <div class="form-group">
+                    <label for="triSide2">Side 2:</label>
+                    <input type="number" id="triSide2" min="0" step="any" placeholder="Enter side 2 (for perimeter)">
+                </div>
+                <div class="form-group">
+                    <label for="triSide3">Side 3:</label>
+                    <input type="number" id="triSide3" min="0" step="any" placeholder="Enter side 3 (for perimeter)">
+                </div>
+            </div>
+
+            <div id="trapezoidInputs" class="input-section" style="display:none;">
+                <div class="form-group">
+                    <label for="trapBase1">Base 1:</label>
+                    <input type="number" id="trapBase1" min="0" step="any" placeholder="Enter first base length">
+                </div>
+                <div class="form-group">
+                    <label for="trapBase2">Base 2:</label>
+                    <input type="number" id="trapBase2" min="0" step="any" placeholder="Enter second base length">
+                </div>
+                <div class="form-group">
+                    <label for="trapHeight">Height:</label>
+                    <input type="number" id="trapHeight" min="0" step="any" placeholder="Enter height">
+                </div>
+                <div class="form-group">
+                    <label for="trapSide1">Side 1:</label>
+                    <input type="number" id="trapSide1" min="0" step="any" placeholder="Enter side 1 (for perimeter)">
+                </div>
+                <div class="form-group">
+                    <label for="trapSide2">Side 2:</label>
+                    <input type="number" id="trapSide2" min="0" step="any" placeholder="Enter side 2 (for perimeter)">
+                </div>
+            </div>
+
+            <div id="ellipseInputs" class="input-section" style="display:none;">
+                <div class="form-group">
+                    <label for="ellipseMajor">Major Axis:</label>
+                    <input type="number" id="ellipseMajor" min="0" step="any" placeholder="Enter major axis length">
+                </div>
+                <div class="form-group">
+                    <label for="ellipseMinor">Minor Axis:</label>
+                    <input type="number" id="ellipseMinor" min="0" step="any" placeholder="Enter minor axis length">
+                </div>
+            </div>
+
+            <div id="parallelogramInputs" class="input-section" style="display:none;">
+                <div class="form-group">
+                    <label for="paraBase">Base:</label>
+                    <input type="number" id="paraBase" min="0" step="any" placeholder="Enter base length">
+                </div>
+                <div class="form-group">
+                    <label for="paraHeight">Height:</label>
+                    <input type="number" id="paraHeight" min="0" step="any" placeholder="Enter height">
+                </div>
+                <div class="form-group">
+                    <label for="paraSide">Side:</label>
+                    <input type="number" id="paraSide" min="0" step="any" placeholder="Enter side length (for perimeter)">
+                </div>
+            </div>
+
+            <div class="operations-section">
+                <div class="form-group">
+                    <label for="operation">Choose calculation:</label>
+                    <select id="operation">
+                        <option value="area">Area</option>
+                        <option value="perimeter">Perimeter/Circumference</option>
+                        <option value="all">All Calculations</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="calculateBtn" onclick="calculateResults()">Calculate</button>
+
+            <div id="result"></div>
+            <div id="additionalResults" class="calculations-list"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
